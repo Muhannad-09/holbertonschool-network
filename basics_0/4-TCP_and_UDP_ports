@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-sudo netstat -tunlp
+# Displays listening TCP and UDP ports with PID and program name
+sudo ss -tunlp

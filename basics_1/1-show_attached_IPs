@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Displays all active IPv4 IPs on the machine
+# Displays all active IPv4 IPs on the machine, including localhost
 
-# Use hostname and ip commands to list IPv4 addresses
-hostname -I | tr ' ' '\n'
+# List all IPv4 addresses
+ifconfig | grep -oP '(?<=inet\s)\d+(\.\d+){3}'

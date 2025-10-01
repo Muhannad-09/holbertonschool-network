@@ -1,1 +1,19 @@
+```mermaid
+flowchart LR
+  Browser([Browser<br/>https://www.google.com]) -->|1. DNS lookup| DNS[DNS<br/>(root → .com → auth)]
+  DNS -->|returns IP| Browser
+  Browser -->|2. TCP connect (SYN) to IP:443| Internet(Internet / Network)
+  Internet -->|3. Encrypted TLS handshake (HTTPS)| Firewall[Firewall / WAF]
+  Firewall -->|4. Forward to| LB[Load Balancer]
+  LB -->|5. Route to| WebServer[Web Server<br/>(HTTP/S)]
+  WebServer -->|6. Forward dynamic request| AppServer[Application Server]
+  AppServer -->|7. Query| Database[(Database)]
+  Database -->|8. Result| AppServer
+  AppServer -->|9. HTML/CSS/JS response| WebServer
+  WebServer -->|10. Response through LB| LB
+  LB -->|11. Through Firewall| Firewall
+  Firewall -->|12. Encrypted response over TLS| Browser
 
+  classDef box fill:#f4f7fb,stroke:#2b7cff,stroke-width:1px;
+  class Browser,DNS,Internet,Firewall,LB,WebServer,AppServer,Database box;
+```
